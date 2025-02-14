@@ -9,6 +9,18 @@ Daemonize any process , written by php ( pcntl )
 
 ## installing 
 
+from Packagist
+```shell
+composer require takuya/php-daemonize-pcntl
+```
+from GitHub
+```shell
+name='php-daemonize-pcntl'
+composer config repositories.$name \
+vcs https://github.com/takuya/$name  
+composer require takuya/$name:master
+composer install
+```
 
 ## Examples 
 
