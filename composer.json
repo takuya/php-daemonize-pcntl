@@ -1,0 +1,35 @@
+{
+  "name": "takuya/php-daemonize-pcntl",
+  "version": "0.1",
+  "license": "GPL-3.0-or-later",
+  "type": "library",
+  "require": {
+    "ext-posix": "*",
+    "ext-pcntl": "*",
+    "ext-shmop": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Takuya\\PhpDaemonize\\": "src/"
+    },
+    "files": [
+      "src/helpers/str_rand.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\PhpDaemonize\\":"tests/",
+      "Tests\\PhpDaemonize\\Units\\":"tests/Units"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "larapack/dd": "*"
+  },
+  "authors": [
+    {
+      "name": "takuya",
+      "email": "55338+takuya@users.noreply.github.com"
+    }
+  ]
+}
