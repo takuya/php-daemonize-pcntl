@@ -37,6 +37,7 @@ use Takuya\PhpDaemonize\PhpDaemonize;
  */
 $m = new PhpDaemonize();
 $m->start(function () { sleep(1000); });
+$m->stop();
 
 ```
 ### Run command as daemon

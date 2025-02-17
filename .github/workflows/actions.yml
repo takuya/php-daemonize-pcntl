@@ -29,4 +29,26 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: update tested date.
+  run-composer-install:
+    runs-on: ubuntu-latest
+    steps:
+      - name:  installation
+        shell: bash
+        run: |
+          php -v
+          composer require takuya/php-daemonize-pcntl
+          cat <<'EOS' > sample.php
+          <?php
+          
+          composer require takuya/php-daemonize-pcntl
+          use Takuya\PhpDaemonize\PhpDaemonize;
+          
+          $m = new PhpDaemonize();
+          $m->start(function () { sleep(10); });
+          $m->stop();
 
+          EOS
+          cat sample.php
+          php sample.php
+
+  
