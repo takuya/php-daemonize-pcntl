@@ -40,7 +40,7 @@ jobs:
           cat <<'EOS' > sample.php
           <?php
           
-          composer require takuya/php-daemonize-pcntl
+          require_once 'vendor/autoload.php';
           use Takuya\PhpDaemonize\PhpDaemonize;
           
           $m = new PhpDaemonize();
