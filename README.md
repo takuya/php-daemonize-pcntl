@@ -1,6 +1,6 @@
 # php-daemonize-pcntl
 
-daemonize function by pcntl_fork.
+daemonize function by pcntl_fork.   
 
 ## php daemon Daemonize all
 
