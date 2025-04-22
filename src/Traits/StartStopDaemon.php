@@ -22,12 +22,21 @@ trait StartStopDaemon {
         $proc->start($func);
         return $proc;
       case 'stop':
-        $class = self::class;
         /** @var \Takuya\PhpDaemonize\PhpDaemonize $proc */
+        $class = self::class;
         $proc = new $class($name);
-        $proc->stop();
-        $proc->wait();
-        return $proc;
+        try {
+          $proc->stop();
+          $proc->wait();
+          return $proc;
+        }
+        catch(\RuntimeException $e ){
+          throw $e;
+        }
+        finally {
+          $func && $func();
+        }
+
       case 'run':
         $func();
         return null;
