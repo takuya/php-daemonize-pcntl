@@ -32,7 +32,7 @@ trait StartStopDaemon {
           $proc->wait();
         }
         catch(ProcessNotFound $e ){
-          fwrite(STDERR,$e->getMessage());
+          fwrite(STDERR,$e->getMessage().PHP_EOL);
         }
         finally {
           $func && $func();
