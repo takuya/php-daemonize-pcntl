@@ -82,7 +82,8 @@ class PhpDaemonize {
   }
   
   public function isKilled():bool {
-    $this->daemon_pid ??= file_get_contents($this->pidFile());
+    $fname = $this->pidFile();
+    $this->daemon_pid ??= file_exists($fname) ? file_get_contents($fname):null;
     if(empty($this->daemon_pid)){
       throw new \RuntimeException('process not found');
     }
