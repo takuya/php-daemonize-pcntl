@@ -25,4 +25,10 @@ trait PIDFile {
   protected function savePidIntoFile( $pid ) {
     file_put_contents($this->getPidFilePath(), $pid);
   }
+  public function pidFileExists():bool{
+    return file_exists($this->pidFile());
+  }
+  protected function pidFileContent():?int{
+    return $this->pidFileExists()? file_get_contents($this->pidFile()):null;
+  }
 }

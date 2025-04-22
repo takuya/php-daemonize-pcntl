@@ -3,6 +3,8 @@
 namespace Takuya\PhpDaemonize\Traits;
 
 
+use Takuya\PhpDaemonize\Exceptions\ProcessNotFound;
+
 trait StartStopDaemon {
   
   public static function run_func( callable $func=null, string $name = null, string $stdout = null, string $stderr = null ) {
@@ -28,14 +30,14 @@ trait StartStopDaemon {
         try {
           $proc->stop();
           $proc->wait();
-          return $proc;
         }
-        catch(\RuntimeException $e ){
-          throw $e;
+        catch(ProcessNotFound $e ){
+          fwrite(STDERR,$e->getMessage());
         }
         finally {
           $func && $func();
         }
+        return $proc;
 
       case 'run':
         $func();

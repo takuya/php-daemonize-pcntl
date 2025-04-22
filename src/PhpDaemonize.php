@@ -8,6 +8,7 @@ use Takuya\PhpDaemonize\Traits\FdsLogsRedirect;
 use Takuya\PhpDaemonize\Traits\StartStopDaemon;
 use Takuya\PhpDaemonize\Traits\ServiceUserGroup;
 use Takuya\PhpDaemonize\Traits\SavePidSharedMemory;
+use Takuya\PhpDaemonize\Exceptions\ProcessNotFound;
 use function Takuya\Helpers\str_rand;
 
 class PhpDaemonize {
@@ -81,11 +82,11 @@ class PhpDaemonize {
     return ! $this->isKilled();
   }
   
-  public function isKilled():bool {
-    $fname = $this->pidFile();
-    $this->daemon_pid ??= file_exists($fname) ? file_get_contents($fname):null;
+  public function isKilled(bool $throw_exception=true):bool {
+    $this->daemon_pid ??= $this->pidFileContent();
     if(empty($this->daemon_pid)){
-      throw new \RuntimeException('process not found');
+      $throw_exception && throw new ProcessNotFound('process not found');
+      return true;
     }
     return posix_kill($this->daemon_pid, 0) === false;
   }
